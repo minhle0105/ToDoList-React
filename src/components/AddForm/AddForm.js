@@ -10,7 +10,8 @@ export const AddForm = (props) => {
         return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     };
 
-    const handleReset = () => {
+    const handleReset = (e) => {
+        e.preventDefault();
         props.setTaskName('');
         props.setTaskDeadline('');
     }
@@ -28,7 +29,7 @@ export const AddForm = (props) => {
                     <Form.Control type="date" min={getTodayString()} id="taskDeadline" value={props.taskDeadline} onChange={(e) => props.setTaskDeadline(e.target.value)} />
                 </Form.Group>
                 <Button variant="outline-primary" type="submit" style={{width: 200}}>Submit Task</Button>
-                <Button variant="outline-dark" onClick={handleReset} style={{marginLeft: 20, width: 200}}>Reset</Button>
+                <Button variant="outline-dark" onMouseDown={e => handleReset(e)} style={{marginLeft: 20, width: 200}}>Reset</Button>
             </Form>
         </div>
     )
