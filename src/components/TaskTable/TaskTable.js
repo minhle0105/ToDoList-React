@@ -21,7 +21,7 @@ export const TaskTable = (props) => {
                             <td>{index + 1}</td>
                             <td>{task.taskName}</td>
                             <td>{task.taskDeadline}</td>
-                            <td><Button style={{marginLeft: "30%"}} variant="btn btn-outline-danger" onClick={() => {props.handleDelete(index)}}>Delete</Button></td>
+                            <td><Button style={{marginLeft: "20%"}} variant="btn btn-outline-danger" onClick={() => {props.handleDelete(index)}}>Delete</Button></td>
                         </tr>
                         </tbody>
                     )
