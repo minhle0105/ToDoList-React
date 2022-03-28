@@ -28,6 +28,13 @@ function App() {
         setTaskDeadline('');
     }
 
+    const handleDelete = (i) => {
+        console.log(i);
+        let newTaskList = [...taskList];
+        newTaskList.splice(i, 1);
+        setTaskList(newTaskList);
+    }
+
 
     return (
         <div className="container">
@@ -35,7 +42,7 @@ function App() {
                 <AddForm taskName={taskName} taskDeadline={taskDeadline} setTaskName={setTaskName} setTaskDeadline={setTaskDeadline} handleSubmit={handleSubmit}/>
             </div>
             <div className="taskTable">
-                <TaskTable taskList={taskList} setTaskList={setTaskList} />
+                <TaskTable taskList={taskList} setTaskList={setTaskList} handleDelete={handleDelete} />
             </div>
         </div>
     );

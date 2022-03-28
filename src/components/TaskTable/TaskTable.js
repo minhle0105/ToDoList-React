@@ -11,6 +11,7 @@ export const TaskTable = (props) => {
                     <th>#</th>
                     <th>Description</th>
                     <th>Deadline</th>
+                    <th> </th>
                 </tr>
                 </thead>
                 {props.taskList.map((task, index) => {
@@ -20,6 +21,7 @@ export const TaskTable = (props) => {
                             <td>{index + 1}</td>
                             <td>{task.taskName}</td>
                             <td>{task.taskDeadline}</td>
+                            <td className="btn btn-outline-danger" onClick={() => {props.handleDelete(index)}}>Delete</td>
                         </tr>
                         </tbody>
                     )

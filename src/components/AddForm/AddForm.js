@@ -14,11 +14,11 @@ export const AddForm = (props) => {
         <div style={{borderStyle: "solid", marginTop: 20, marginBottom: 20}}>
             <h1 style={{textAlign: "center"}}>Add New Task</h1>
             <Form style={{margin: 10}} onSubmit={props.handleSubmit}>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                <Form.Group className="mb-3">
                     <Form.Label htmlFor="taskName">Description</Form.Label>
                     <Form.Control id="taskName" type="text" value={props.taskName} onChange={(e) => props.setTaskName(e.target.value)} />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Group className="mb-3">
                     <Form.Label htmlFor="taskDeadline">Deadline</Form.Label>
                     <Form.Control type="date" min={getTodayString()} id="taskDeadline" value={props.taskDeadline} onChange={(e) => props.setTaskDeadline(e.target.value)} />
                 </Form.Group>
