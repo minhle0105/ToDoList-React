@@ -14,7 +14,8 @@ export const AddForm = (props) => {
                     <Form.Label htmlFor="taskDeadline">Deadline</Form.Label>
                     <Form.Control type="date" id="taskDeadline" onChange={(e) => props.setTaskDeadline(e.target.value)} />
                 </Form.Group>
-                <Button variant="outline-primary" type="submit">Submit Task</Button>
+                <Button variant="outline-primary" type="submit" style={{width: 200}}>Submit Task</Button>
+                <Button variant="outline-dark" type="reset" style={{marginLeft: 20, width: 200}}>Reset</Button>
             </Form>
         </div>
     )
