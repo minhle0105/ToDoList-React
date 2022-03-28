@@ -21,7 +21,7 @@ export const AddForm = (props) => {
             <Form style={{margin: 10}} onSubmit={props.handleSubmit}>
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="taskName">Description</Form.Label>
-                    <Form.Control autocomplete="off" required id="taskName" type="text" value={props.taskName} onChange={(e) => props.setTaskName(e.target.value)} />
+                    <Form.Control autoComplete="off" required id="taskName" type="text" value={props.taskName} onChange={(e) => props.setTaskName(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="taskDeadline">Deadline</Form.Label>

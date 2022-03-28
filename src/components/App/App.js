@@ -65,10 +65,12 @@ function App() {
     }
 
     const handleDelete = (i) => {
-        let newTaskList = [...taskList];
-        newTaskList.splice(i, 1);
-        showDeleteAlert();
-        setTaskList(newTaskList);
+        if (window.confirm("Are you sure to delete?")) {
+            let newTaskList = [...taskList];
+            newTaskList.splice(i, 1);
+            showDeleteAlert();
+            setTaskList(newTaskList);
+        }
     }
 
 
