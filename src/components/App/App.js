@@ -94,19 +94,17 @@ function App() {
     }
 
     const handleSort = (type) => {
-        console.log(`Sort ${type}`)
         const originalTaskList = [...taskList];
         if (type === "ascending") {
-            console.log("Ascending")
             taskList.sort(ascendingComparator);
             setTaskList(taskList);
-            console.log(taskList)
         }
         else if (type === "descending") {
-            console.log("Descending")
             taskList.sort(descendingComparator);
             setTaskList(taskList);
-            console.log(taskList)
+        }
+        else {
+            setTaskList(originalTaskList)
         }
     }
 
