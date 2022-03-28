@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './App.css';
 import {AddForm} from "../AddForm/AddForm";
 import {TaskTable} from "../TaskTable/TaskTable";
@@ -6,9 +6,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
-    const [taskList, setTaskList] = useState([]);
+    const [taskList, setTaskList] = useState(JSON.parse(sessionStorage.getItem("taskList")) ? JSON.parse(sessionStorage.getItem("taskList")) : []);
     const [taskName, setTaskName] = useState('');
     const [taskDeadline, setTaskDeadline] = useState('')
+
+    useEffect(() => {
+        sessionStorage.setItem("taskList", JSON.stringify(taskList))
+    }, [taskList])
 
     const addNewTask = (taskName, taskDeadline) => {
         setTaskList([
