@@ -1,8 +1,11 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Table} from "react-bootstrap";
 import Swal from "sweetalert2";
+import {useState} from "react";
+import './TaskTable.css';
 
 export const TaskTable = (props) => {
+    const [sortField, setSortField] = useState('ascending');
 
     const showPopup = (index, name) => {
         Swal.fire({
@@ -17,15 +20,28 @@ export const TaskTable = (props) => {
         })
     }
 
+    const handleSortLocal = () => {
+        if (sortField === 'ascending') {
+            setSortField('descending');
+        }
+        else {
+            setSortField('ascending');
+        }
+        props.handleSort(sortField);
+    }
+
     return (
         <div>
-            <h1 style={{textAlign: "center"}}>Tasks List</h1>
+            <div style={{display: "inline"}}>
+                <h1 style={{textAlign: "center"}}>Tasks List</h1>
+            </div>
+
             <Table striped bordered hover>
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Description</th>
-                    <th>Deadline</th>
+                    <th>Deadline <img id="sortCol" onClick={() => handleSortLocal()} src="/sortIcon.png" width={12} height={12} alt="sort"/> </th>
                     <th> </th>
                 </tr>
                 </thead>
