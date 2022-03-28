@@ -24,6 +24,8 @@ function App() {
         console.log("submit")
         e.preventDefault();
         addNewTask(taskName, taskDeadline);
+        setTaskName('');
+        setTaskDeadline('');
     }
 
 

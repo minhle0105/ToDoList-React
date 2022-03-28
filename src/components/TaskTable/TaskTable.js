@@ -4,6 +4,7 @@ import {Table} from "react-bootstrap";
 export const TaskTable = (props) => {
     return (
         <div style={{marginTop: 20}}>
+            <h1 style={{textAlign: "center"}}>Tasks List</h1>
             <Table striped bordered hover>
                 <thead>
                 <tr>
