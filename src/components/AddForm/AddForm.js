@@ -21,14 +21,14 @@ export const AddForm = (props) => {
             <Form style={{margin: 10}} onSubmit={props.handleSubmit}>
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="taskName">Description</Form.Label>
-                    <Form.Control required id="taskName" type="text" value={props.taskName} onChange={(e) => props.setTaskName(e.target.value)} />
+                    <Form.Control autocomplete="off" required id="taskName" type="text" value={props.taskName} onChange={(e) => props.setTaskName(e.target.value)} />
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="taskDeadline">Deadline</Form.Label>
                     <Form.Control type="date" min={getTodayString()} id="taskDeadline" value={props.taskDeadline} onChange={(e) => props.setTaskDeadline(e.target.value)} />
                 </Form.Group>
-                <Button variant="outline-primary" type="submit" style={{width: 200}}>Submit Task</Button>
-                <Button variant="outline-dark" onClick={handleReset} style={{marginLeft: 20, width: 200}}>Reset</Button>
+                <Button variant="outline-primary" className="btn" type="submit" style={{width: 200}}>Submit Task</Button>
+                <Button variant="outline-dark" className="btn" onClick={handleReset} style={{marginLeft: 20, width: 200}}>Reset</Button>
             </Form>
         </div>
     )
