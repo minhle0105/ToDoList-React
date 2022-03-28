@@ -28,7 +28,7 @@ function App() {
             title: `Successfully added new task`,
             icon: 'success',
             showConfirmButton: false,
-        }), 1500);
+        }), 1000);
     }
 
     const showDeleteAlert = () => {
@@ -43,7 +43,7 @@ function App() {
             title: `Successfully deleted`,
             icon: 'success',
             showConfirmButton: false,
-        }), 1500);
+        }), 1000);
     }
 
     const addNewTask = (taskName, taskDeadline) => {
