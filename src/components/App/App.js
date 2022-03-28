@@ -108,9 +108,6 @@ function App() {
             setTaskList(taskList);
             console.log(taskList)
         }
-        else {
-            setTaskList(originalTaskList);
-        }
     }
 
 
