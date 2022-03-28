@@ -8,14 +8,14 @@ import {Button} from "react-bootstrap";
 
 function App() {
 
-    const [taskList, setTaskList] = useState(JSON.parse(sessionStorage.getItem("taskList")) ? JSON.parse(sessionStorage.getItem("taskList")) : []);
+    const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem("taskList")) ? JSON.parse(localStorage.getItem("taskList")) : []);
     const [taskName, setTaskName] = useState('');
     const [taskDeadline, setTaskDeadline] = useState('')
     const [swalProps, setSwalProps] = useState({});
     const [showAddForm, setShowAddForm] = useState(false);
 
     useEffect(() => {
-        sessionStorage.setItem("taskList", JSON.stringify(taskList))
+        localStorage.setItem("taskList", JSON.stringify(taskList))
     }, [taskList])
 
     const showSuccessAlert = () => {
