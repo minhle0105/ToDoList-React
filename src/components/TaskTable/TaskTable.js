@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Table} from "react-bootstrap";
+import {Button, Table} from "react-bootstrap";
 
 export const TaskTable = (props) => {
     return (
-        <div style={{marginTop: 20}}>
+        <div>
             <h1 style={{textAlign: "center"}}>Tasks List</h1>
             <Table striped bordered hover>
                 <thead>
@@ -21,7 +21,7 @@ export const TaskTable = (props) => {
                             <td>{index + 1}</td>
                             <td>{task.taskName}</td>
                             <td>{task.taskDeadline}</td>
-                            <td className="btn btn-outline-danger" onClick={() => {props.handleDelete(index)}}>Delete</td>
+                            <td><Button style={{marginLeft: "30%"}} variant="btn btn-outline-danger" onClick={() => {props.handleDelete(index)}}>Delete</Button></td>
                         </tr>
                         </tbody>
                     )
