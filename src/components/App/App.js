@@ -4,6 +4,7 @@ import {AddForm} from "../AddForm/AddForm";
 import {TaskTable} from "../TaskTable/TaskTable";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SweetAlert2 from 'react-sweetalert2';
+import {Button} from "react-bootstrap";
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
     const [taskName, setTaskName] = useState('');
     const [taskDeadline, setTaskDeadline] = useState('')
     const [swalProps, setSwalProps] = useState({});
+    const [showAddForm, setShowAddForm] = useState(false);
 
     useEffect(() => {
         sessionStorage.setItem("taskList", JSON.stringify(taskList))
@@ -74,13 +76,21 @@ function App() {
 
     return (
         <div className="container">
+            <div style={{marginTop: 10}}>
+                <Button onClick={() => {
+                    setShowAddForm(!showAddForm)
+                }}>{showAddForm ? 'Hide Add Form' : 'Show Add Form'}</Button>
+            </div>
             <div className="addForm">
-                <AddForm taskName={taskName} taskDeadline={taskDeadline} setTaskName={setTaskName} setTaskDeadline={setTaskDeadline} handleSubmit={handleSubmit}/>
+                {showAddForm ? <AddForm taskName={taskName} taskDeadline={taskDeadline} setTaskName={setTaskName}
+                                        setTaskDeadline={setTaskDeadline} handleSubmit={handleSubmit}/> : null}
+
             </div>
             <div className="taskTable">
-                <TaskTable taskList={taskList} setTaskList={setTaskList} handleDelete={handleDelete} />
+                <TaskTable taskList={taskList} setTaskList={setTaskList} handleDelete={handleDelete}/>
             </div>
-            <SweetAlert2 title={swalProps.title} show={swalProps.show} icon={swalProps.icon} showConfirmButton={swalProps.showConfirmButton} />
+            <SweetAlert2 title={swalProps.title} show={swalProps.show} icon={swalProps.icon}
+                         showConfirmButton={swalProps.showConfirmButton}/>
         </div>
     );
 }
