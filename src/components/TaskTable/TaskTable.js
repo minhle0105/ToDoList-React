@@ -57,7 +57,7 @@ export const TaskTable = (props) => {
                     <tbody>
                     {props.taskList.map((task, index) => (
                         <Fragment>
-                            {idToUpdate === index ? <EditableTask index={index} handleUpdateClick={handleUpdateClick} showPopup={showPopup} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
+                            {idToUpdate === index ? <EditableTask index={index} task={task} handleUpdateClick={handleUpdateClick} showPopup={showPopup} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
                         </Fragment>
                     ))}
                     </tbody>
