@@ -4,9 +4,10 @@ export const EditableTask = (props) => {
     return (
         <tr key={props.index}>
             <td>{props.index + 1}</td>
-            <td>{props.task.taskName}</td>
-            <td>{props.task.taskDeadline}</td>
+            <td><input id="taskName" type="text" required/></td>
+            <td><input id="taskDeadline" type="date" required/></td>
             <td><Button style={{marginLeft: "20%"}} variant="btn btn-outline-danger" onClick={() => {props.showPopup(props.index, props.task.taskName)}}>Delete</Button></td>
+            <td><Button style={{marginLeft: "20%"}} variant="btn btn-outline-success" onClick={() => {props.handleUpdateClick(props.index)}}>Update</Button></td>
         </tr>
     )
 }
