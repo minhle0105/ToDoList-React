@@ -24,9 +24,14 @@ export const AddForm = (props) => {
                     <Form.Control required type="date" min={props.minDate} id="taskDeadline" value={props.taskDeadline}
                                   onChange={(e) => props.setTaskDeadline(e.target.value)}/>
                 </Form.Group>
-                <Button variant="outline-primary" type="submit" style={{width: 200}}>Submit Task</Button>
-                <Button variant="outline-dark" onMouseDown={e => handleReset(e)}
-                        style={{marginLeft: 20, width: 200}}>Reset</Button>
+                <div style={{width: "100%", display: "flex"}}>
+                    <div style={{textAlign: "center", display: "inline"}}>
+                        <Button variant="outline-primary" type="submit">Submit</Button>
+                    </div>
+                    <div style={{textAlign: "center", display: "inline"}}>
+                        <Button variant="outline-dark" onMouseDown={e => handleReset(e)}>Reset</Button>
+                    </div>
+                </div>
             </Form>
         </div>
     )
