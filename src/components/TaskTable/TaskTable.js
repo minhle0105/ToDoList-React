@@ -3,6 +3,7 @@ import {Button, Table} from "react-bootstrap";
 import Swal from "sweetalert2";
 import {useState} from "react";
 import './TaskTable.css';
+import {Task} from "../Task/Task";
 
 export const TaskTable = (props) => {
     const [sortField, setSortField] = useState('ascending');
@@ -45,18 +46,13 @@ export const TaskTable = (props) => {
                     <th> </th>
                 </tr>
                 </thead>
+                <tbody>
                 {props.taskList.map((task, index) => {
                     return (
-                        <tbody key={index}>
-                        <tr>
-                            <td>{index + 1}</td>
-                            <td>{task.taskName}</td>
-                            <td>{task.taskDeadline}</td>
-                            <td><Button style={{marginLeft: "20%"}} variant="btn btn-outline-danger" onClick={() => {showPopup(index, task.taskName)}}>Delete</Button></td>
-                        </tr>
-                        </tbody>
+                        <Task index={index} task={task} showPopup={showPopup} />
                     )
                 })}
+                </tbody>
             </Table>
         </div>
     )
