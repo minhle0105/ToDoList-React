@@ -79,7 +79,7 @@ export const TaskTable = (props) => {
                     <tbody>
                     {props.taskList.map((task, index) => (
                         <Fragment key={index}>
-                            {idToUpdate === index ? <EditableTask index={index} task={task} setName={setNewName} setDeadline={setNewDeadline} saveUpdateData={saveUpdateData} handleCancel={handleCancelUpdate} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
+                            {idToUpdate === index ? <EditableTask minDate={props.minDate} index={index} task={task} setName={setNewName} setDeadline={setNewDeadline} saveUpdateData={saveUpdateData} handleCancel={handleCancelUpdate} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
                         </Fragment>
                     ))}
                     </tbody>
