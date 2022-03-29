@@ -108,6 +108,13 @@ function App() {
         }
     }
 
+    const getTodayString = () => {
+        const [month, day, year] = new Date()
+            .toLocaleDateString("en-US")
+            .split("/");
+        return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+    };
+
 
     return (
         <div className="container">
@@ -118,12 +125,12 @@ function App() {
                 }}>{showAddForm ? 'Hide Add Form' : 'Show Add Form'}</Button>
             </div>
             <div className="addForm">
-                {showAddForm ? <AddForm taskName={taskName} taskDeadline={taskDeadline} setTaskName={setTaskName}
+                {showAddForm ? <AddForm minDate={getTodayString()} taskName={taskName} taskDeadline={taskDeadline} setTaskName={setTaskName}
                                         setTaskDeadline={setTaskDeadline} handleSubmit={handleSubmit}/> : null}
 
             </div>
             <div className="taskTable">
-                <TaskTable taskList={taskList} setTaskList={setTaskList} setTaskName={setTaskName} setTaskDeadline={setTaskDeadline} handleSort={handleSort} handleDelete={handleDelete}/>
+                <TaskTable taskList={taskList} minDate={getTodayString()} setTaskList={setTaskList} setTaskName={setTaskName} setTaskDeadline={setTaskDeadline} handleSort={handleSort} handleDelete={handleDelete}/>
             </div>
             <SweetAlert2 title={swalProps.title} show={swalProps.show} icon={swalProps.icon}
                          showConfirmButton={swalProps.showConfirmButton}/>

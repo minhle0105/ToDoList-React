@@ -26,13 +26,6 @@ export const TaskTable = (props) => {
         })
     }
 
-    const getTodayString = () => {
-        const [month, day, year] = new Date()
-            .toLocaleDateString("en-US")
-            .split("/");
-        return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
-    };
-
     const handleSortLocal = () => {
         if (sortField === 'ascending') {
             setSortField('descending');
@@ -86,7 +79,7 @@ export const TaskTable = (props) => {
                     <tbody>
                     {props.taskList.map((task, index) => (
                         <Fragment key={index}>
-                            {idToUpdate === index ? <EditableTask minDate={getTodayString()} index={index} task={task} setName={setNewName} setDeadline={setNewDeadline} saveUpdateData={saveUpdateData} handleCancel={handleCancelUpdate} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
+                            {idToUpdate === index ? <EditableTask minDate={props.minDate} index={index} task={task} setName={setNewName} setDeadline={setNewDeadline} saveUpdateData={saveUpdateData} handleCancel={handleCancelUpdate} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
                         </Fragment>
                     ))}
                     </tbody>
