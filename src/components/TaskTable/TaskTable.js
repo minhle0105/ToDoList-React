@@ -1,11 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Button, Table} from "react-bootstrap";
+import {Table} from "react-bootstrap";
 import Swal from "sweetalert2";
 import {useState} from "react";
 import './TaskTable.css';
+import {EditableTask} from "../Task/EditableTask";
+import {ReadOnlyTask} from "../Task/ReadOnlyTask";
+import {Fragment} from "react";
 
 export const TaskTable = (props) => {
     const [sortField, setSortField] = useState('ascending');
+    const [idToUpdate, setIdToUpdate] = useState(null);
+    const [newTaskName, setNewName] = useState('');
+    const [newTaskDeadline, setNewDeadline] = useState('');
 
     const showPopup = (index, name) => {
         Swal.fire({
@@ -30,34 +36,56 @@ export const TaskTable = (props) => {
         props.handleSort(sortField);
     }
 
+    const handleUpdateClick = (i) => {
+        setIdToUpdate(i);
+    }
+
+    const saveUpdateData = (i) => {
+        if (!newTaskName) {
+            setNewName(props.taskList[i].taskName);
+        }
+        if (!newTaskDeadline) {
+            setNewDeadline(props.taskList[i].taskDeadline);
+        }
+        const newTaskList = [...props.taskList];
+        newTaskList[i] = {
+            taskName: newTaskName,
+            taskDeadline: newTaskDeadline
+        }
+        props.setTaskList(newTaskList);
+        setIdToUpdate(null);
+    }
+
+    const handleCancelUpdate = () => {
+        setIdToUpdate(null);
+    }
+
     return (
         <div>
             <div style={{display: "inline"}}>
                 <h1 style={{textAlign: "center"}}>Tasks List</h1>
             </div>
 
-            <Table striped bordered hover>
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Description</th>
-                    <th>Deadline <img id="sortCol" onClick={() => handleSortLocal()} src="/sortIcon.png" width={12} height={12} alt="sort"/> </th>
-                    <th> </th>
-                </tr>
-                </thead>
-                {props.taskList.map((task, index) => {
-                    return (
-                        <tbody key={index}>
-                        <tr>
-                            <td>{index + 1}</td>
-                            <td>{task.taskName}</td>
-                            <td>{task.taskDeadline}</td>
-                            <td><Button style={{marginLeft: "20%"}} variant="btn btn-outline-danger" onClick={() => {showPopup(index, task.taskName)}}>Delete</Button></td>
-                        </tr>
-                        </tbody>
-                    )
-                })}
-            </Table>
+            <form>
+                <Table striped bordered hover>
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Description</th>
+                        <th>Deadline <img id="sortCol" onClick={() => handleSortLocal()} src="/sortIcon.png" width={12} height={12} alt="sort"/> </th>
+                        <th colSpan={2} style={{textAlign: "center"}}> Action </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {props.taskList.map((task, index) => (
+                        <Fragment key={index}>
+                            {idToUpdate === index ? <EditableTask index={index} task={task} setName={setNewName} setDeadline={setNewDeadline} saveUpdateData={saveUpdateData} handleCancel={handleCancelUpdate} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
+                        </Fragment>
+                    ))}
+                    </tbody>
+                </Table>
+            </form>
+
         </div>
     )
 }

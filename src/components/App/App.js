@@ -123,7 +123,7 @@ function App() {
 
             </div>
             <div className="taskTable">
-                <TaskTable taskList={taskList} setTaskList={setTaskList} handleSort={handleSort} handleDelete={handleDelete}/>
+                <TaskTable taskList={taskList} setTaskList={setTaskList} setTaskName={setTaskName} setTaskDeadline={setTaskDeadline} handleSort={handleSort} handleDelete={handleDelete}/>
             </div>
             <SweetAlert2 title={swalProps.title} show={swalProps.show} icon={swalProps.icon}
                          showConfirmButton={swalProps.showConfirmButton}/>
