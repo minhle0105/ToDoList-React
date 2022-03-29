@@ -9,9 +9,6 @@ import {Fragment} from "react";
 
 export const TaskTable = (props) => {
     const [idToUpdate, setIdToUpdate] = useState(null);
-    const [newTaskName, setNewName] = useState('');
-    const [newTaskDeadline, setNewDeadline] = useState('');
-
     const showPopup = (index, name) => {
         Swal.fire({
             title: `Are you sure to delete task "${name.trim()}" ? This action can not be undone`,
@@ -29,21 +26,6 @@ export const TaskTable = (props) => {
         setIdToUpdate(i);
     }
 
-    const saveUpdateData = (i) => {
-        if (!newTaskName) {
-            setNewName(props.taskList[i].taskName);
-        }
-        if (!newTaskDeadline) {
-            setNewDeadline(props.taskList[i].taskDeadline);
-        }
-        const newTaskList = [...props.taskList];
-        newTaskList[i] = {
-            taskName: newTaskName,
-            taskDeadline: newTaskDeadline
-        }
-        props.setTaskList(newTaskList);
-        setIdToUpdate(null);
-    }
 
     const handleCancelUpdate = () => {
         setIdToUpdate(null);
@@ -62,13 +44,17 @@ export const TaskTable = (props) => {
                         <th>#</th>
                         <th>Description</th>
                         <th>Deadline</th>
-                        <th colSpan={2} style={{textAlign: "center"}}> Action </th>
+                        <th colSpan={2} style={{textAlign: "center"}}> Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     {props.taskList.map((task, index) => (
                         <Fragment key={index}>
-                            {idToUpdate === index ? <EditableTask minDate={props.minDate} index={index} task={task} setName={setNewName} setDeadline={setNewDeadline} saveUpdateData={saveUpdateData} handleCancel={handleCancelUpdate} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
+                            {idToUpdate === index ?
+                                <EditableTask minDate={props.minDate} index={index} task={task} name={props.newName}
+                                              setIdToUpdate={setIdToUpdate} saveUpdateData={props.handleUpdate} handleCancel={handleCancelUpdate}/> :
+                                <ReadOnlyTask index={index} task={task} showPopup={showPopup}
+                                              handleUpdateClick={handleUpdateClick}/>}
                         </Fragment>
                     ))}
                     </tbody>

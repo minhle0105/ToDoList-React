@@ -73,15 +73,15 @@ function App() {
         setTaskList(newTaskList);
     }
 
-    const ascendingComparator = (a, b) => {
-        if (a.taskDeadline > b.taskDeadline) {
-            return -1;
-        }
-        if (a.taskDeadline < b.taskDeadline) {
-            return 1;
-        }
-        return 0
-    }
+    // const ascendingComparator = (a, b) => {
+    //     if (a.taskDeadline > b.taskDeadline) {
+    //         return -1;
+    //     }
+    //     if (a.taskDeadline < b.taskDeadline) {
+    //         return 1;
+    //     }
+    //     return 0
+    // }
 
     const getTodayString = () => {
         const [month, day, year] = new Date()
@@ -89,6 +89,16 @@ function App() {
             .split("/");
         return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     };
+
+    const saveUpdateData = (i, newName, newDate) => {
+
+        let newTaskList = [...taskList];
+        newTaskList[i] = {
+            taskName: newName,
+            taskDeadline: newDate
+        }
+        setTaskList(newTaskList);
+    }
 
 
     return (
@@ -100,12 +110,14 @@ function App() {
                 }}>{showAddForm ? 'Hide Add Form' : 'Show Add Form'}</Button>
             </div>
             <div className="addForm">
-                {showAddForm ? <AddForm minDate={getTodayString()} taskName={taskName} taskDeadline={taskDeadline} setTaskName={setTaskName}
+                {showAddForm ? <AddForm minDate={getTodayString()} taskName={taskName} taskDeadline={taskDeadline}
+                                        setTaskName={setTaskName}
                                         setTaskDeadline={setTaskDeadline} handleSubmit={handleSubmit}/> : null}
 
             </div>
             <div className="taskTable">
-                <TaskTable taskList={taskList} minDate={getTodayString()} setTaskList={setTaskList} setTaskName={setTaskName} setTaskDeadline={setTaskDeadline} handleDelete={handleDelete}/>
+                <TaskTable taskList={taskList} minDate={getTodayString()} setTaskList={setTaskList}
+                           handleUpdate={saveUpdateData} handleDelete={handleDelete}/>
             </div>
             <SweetAlert2 title={swalProps.title} show={swalProps.show} icon={swalProps.icon}
                          showConfirmButton={swalProps.showConfirmButton}/>
