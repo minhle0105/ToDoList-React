@@ -9,6 +9,7 @@ import {Fragment} from "react";
 
 export const TaskTable = (props) => {
     const [idToUpdate, setIdToUpdate] = useState(null);
+    const [sortField, setSortField] = useState('ascending');
     const showPopup = (index, name) => {
         Swal.fire({
             title: `Are you sure to delete task "${name.trim()}" ? This action can not be undone`,
@@ -31,6 +32,17 @@ export const TaskTable = (props) => {
         setIdToUpdate(null);
     }
 
+    const handleSortLocal = () => {
+        if (sortField === 'ascending') {
+            setSortField('descending');
+        }
+        else {
+            setSortField('ascending');
+        }
+        props.handleSort(sortField);
+    }
+
+
     return (
         <div>
             <div style={{display: "inline"}}>
@@ -43,7 +55,7 @@ export const TaskTable = (props) => {
                     <tr>
                         <th>#</th>
                         <th>Description</th>
-                        <th>Deadline</th>
+                        <th>Deadline <img id="sortCol" onClick={() => handleSortLocal()} src="/sortIcon.png" width={12} height={12} alt="sort"/> </th>
                         <th colSpan={2} style={{textAlign: "center"}}> Action</th>
                     </tr>
                     </thead>
