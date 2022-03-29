@@ -10,8 +10,8 @@ import {Fragment} from "react";
 export const TaskTable = (props) => {
     const [sortField, setSortField] = useState('ascending');
     const [idToUpdate, setIdToUpdate] = useState(null);
-    const [newName, setNewName] = useState('');
-    const [newDeadline, setNewDeadline] = useState('');
+    const [newTaskName, setNewName] = useState('');
+    const [newTaskDeadline, setNewDeadline] = useState('');
 
     const showPopup = (index, name) => {
         Swal.fire({
@@ -42,15 +42,19 @@ export const TaskTable = (props) => {
 
     const saveUpdateData = (i) => {
         console.log(i);
-        console.log(`New name ${newName}`)
-        console.log(`New deadline ${newDeadline}`)
+        if (!newTaskName) {
+            setNewName(props.taskList[i].taskName);
+        }
+        if (!newTaskDeadline) {
+            setNewDeadline(props.taskList[i].taskDeadline);
+        }
         const newTaskList = [...props.taskList];
         newTaskList[i] = {
-            taskName: newName,
-            taskDeadline: newDeadline
+            taskName: newTaskName,
+            taskDeadline: newTaskDeadline
         }
-        props.setTaskList(newTaskList)
-
+        props.setTaskList(newTaskList);
+        setIdToUpdate(null);
     }
 
     return (
@@ -71,8 +75,8 @@ export const TaskTable = (props) => {
                     </thead>
                     <tbody>
                     {props.taskList.map((task, index) => (
-                        <Fragment>
-                            {idToUpdate === index ? <EditableTask index={index} task={task} setNewName={setNewName} setNewDeadline={setNewDeadline} saveUpdateData={saveUpdateData} showPopup={showPopup} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
+                        <Fragment key={index}>
+                            {idToUpdate === index ? <EditableTask index={index} task={task} setName={setNewName} setDeadline={setNewDeadline} saveUpdateData={saveUpdateData} showPopup={showPopup} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
                         </Fragment>
                     ))}
                     </tbody>
