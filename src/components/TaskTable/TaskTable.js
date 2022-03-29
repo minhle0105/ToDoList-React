@@ -29,15 +29,15 @@ export const TaskTable = (props) => {
         setIdToUpdate(i);
     }
 
-    const saveUpdateData = () => {
+    const saveUpdateData = (i) => {
         if (!newTaskName) {
-            setNewName(props.taskList[idToUpdate].taskName);
+            setNewName(props.taskList[i].taskName);
         }
         if (!newTaskDeadline) {
-            setNewDeadline(props.taskList[idToUpdate].taskDeadline);
+            setNewDeadline(props.taskList[i].taskDeadline);
         }
         const newTaskList = [...props.taskList];
-        newTaskList[idToUpdate] = {
+        newTaskList[i] = {
             taskName: newTaskName,
             taskDeadline: newTaskDeadline
         }
