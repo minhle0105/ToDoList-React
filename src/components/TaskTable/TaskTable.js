@@ -41,7 +41,6 @@ export const TaskTable = (props) => {
     }
 
     const saveUpdateData = (i) => {
-        console.log(i);
         if (!newTaskName) {
             setNewName(props.taskList[i].taskName);
         }

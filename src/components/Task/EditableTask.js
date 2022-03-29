@@ -5,12 +5,10 @@ export const EditableTask = (props) => {
         <tr key={props.index}>
             <td>{props.index + 1}</td>
             <td><input defaultValue={props.task.taskName} id="taskName" type="text" required onChange={(e) => {
-                props.setName(e.target.value);
-                console.log(`On change ${e.target.value} name`)
+                props.setName(e.target.value ? e.target.value : props.task.taskName);
             }}/></td>
             <td><input defaultValue={props.task.taskDeadline} id="taskDeadline" type="date" required onChange={(e) => {
-                props.setDeadline(e.target.value)
-                console.log(`On change ${e.target.value} deadline`)
+                props.setDeadline(e.target.value ? e.target.value : props.task.taskDeadline)
             }}/></td>
             <td><Button style={{marginLeft: "20%"}} variant="btn btn-outline-danger" onClick={(e) => {
                 e.preventDefault();
