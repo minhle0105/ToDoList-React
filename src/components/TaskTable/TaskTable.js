@@ -56,6 +56,10 @@ export const TaskTable = (props) => {
         setIdToUpdate(null);
     }
 
+    const handleCancelUpdate = () => {
+        setIdToUpdate(null);
+    }
+
     return (
         <div>
             <div style={{display: "inline"}}>
@@ -75,7 +79,7 @@ export const TaskTable = (props) => {
                     <tbody>
                     {props.taskList.map((task, index) => (
                         <Fragment key={index}>
-                            {idToUpdate === index ? <EditableTask index={index} task={task} setName={setNewName} setDeadline={setNewDeadline} saveUpdateData={saveUpdateData} showPopup={showPopup} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
+                            {idToUpdate === index ? <EditableTask index={index} task={task} setName={setNewName} setDeadline={setNewDeadline} saveUpdateData={saveUpdateData} handleCancel={handleCancelUpdate} /> :  <ReadOnlyTask index={index} task={task} showPopup={showPopup} handleUpdateClick={handleUpdateClick} />}
                         </Fragment>
                     ))}
                     </tbody>

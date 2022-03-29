@@ -12,8 +12,8 @@ export const EditableTask = (props) => {
             }}/></td>
             <td><Button style={{marginLeft: "20%"}} variant="btn btn-outline-danger" onClick={(e) => {
                 e.preventDefault();
-                props.showPopup(props.index, props.task.taskName)
-            }}>Delete</Button></td>
+                props.handleCancel();
+            }}>Cancel</Button></td>
             <td><Button style={{marginLeft: "20%"}} variant="btn btn-outline-success" onClick={(e) => {
                 e.preventDefault();
                 props.saveUpdateData(props.index)
