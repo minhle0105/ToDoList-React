@@ -13,8 +13,6 @@ function App() {
     const [taskDeadline, setTaskDeadline] = useState('')
     const [swalProps, setSwalProps] = useState({});
     const [showAddForm, setShowAddForm] = useState(false);
-    const [newTaskName, setNewName] = useState('');
-    const [newTaskDeadline, setNewDeadline] = useState('');
 
     useEffect(() => {
         localStorage.setItem("taskList", JSON.stringify(taskList));
@@ -75,15 +73,15 @@ function App() {
         setTaskList(newTaskList);
     }
 
-    const ascendingComparator = (a, b) => {
-        if (a.taskDeadline > b.taskDeadline) {
-            return -1;
-        }
-        if (a.taskDeadline < b.taskDeadline) {
-            return 1;
-        }
-        return 0
-    }
+    // const ascendingComparator = (a, b) => {
+    //     if (a.taskDeadline > b.taskDeadline) {
+    //         return -1;
+    //     }
+    //     if (a.taskDeadline < b.taskDeadline) {
+    //         return 1;
+    //     }
+    //     return 0
+    // }
 
     const getTodayString = () => {
         const [month, day, year] = new Date()
@@ -92,22 +90,12 @@ function App() {
         return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     };
 
-    const saveUpdateData = (i) => {
-        if (!newTaskName) {
-            setNewName(taskList[i].taskName);
-            console.log(`new name ${newTaskName}`)
-        }
-        if (!newTaskDeadline) {
-            setNewDeadline(taskList[i].taskDeadline);
-            console.log(`new deadline ${newTaskDeadline}`)
-        }
-        console.log(newTaskName);
-        console.log(newTaskDeadline);
+    const saveUpdateData = (i, newName, newDate) => {
 
         let newTaskList = [...taskList];
         newTaskList[i] = {
-            taskName: newTaskName,
-            taskDeadline: newTaskDeadline
+            taskName: newName,
+            taskDeadline: newDate
         }
         setTaskList(newTaskList);
     }
@@ -129,9 +117,7 @@ function App() {
             </div>
             <div className="taskTable">
                 <TaskTable taskList={taskList} minDate={getTodayString()} setTaskList={setTaskList}
-                           handleUpdate={saveUpdateData}
-                           newName={newTaskName} newDeadline={newTaskDeadline} setNewName={setNewName}
-                           setNewDeadline={setNewDeadline} handleDelete={handleDelete}/>
+                           handleUpdate={saveUpdateData} handleDelete={handleDelete}/>
             </div>
             <SweetAlert2 title={swalProps.title} show={swalProps.show} icon={swalProps.icon}
                          showConfirmButton={swalProps.showConfirmButton}/>

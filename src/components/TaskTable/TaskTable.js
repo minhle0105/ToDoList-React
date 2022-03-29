@@ -52,9 +52,7 @@ export const TaskTable = (props) => {
                         <Fragment key={index}>
                             {idToUpdate === index ?
                                 <EditableTask minDate={props.minDate} index={index} task={task} name={props.newName}
-                                              deadline={props.newDeadline} newName={props.newName} newDeadline={props.newDeadline} setNewName={props.setNewName}
-                                              setNewDeadline={props.setNewDeadline} setIdToUpdate={setIdToUpdate}
-                                              saveUpdateData={props.handleUpdate} handleCancel={handleCancelUpdate}/> :
+                                              setIdToUpdate={setIdToUpdate} saveUpdateData={props.handleUpdate} handleCancel={handleCancelUpdate}/> :
                                 <ReadOnlyTask index={index} task={task} showPopup={showPopup}
                                               handleUpdateClick={handleUpdateClick}/>}
                         </Fragment>
