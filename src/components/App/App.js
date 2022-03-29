@@ -76,8 +76,7 @@ function App() {
     const handleSort = (type) => {
         if (type === 'ascending') {
             taskList.sort(ascendingComparator);
-        }
-        else if (type === 'descending') {
+        } else if (type === 'descending') {
             taskList.sort(descendingComparator);
         }
 
@@ -137,7 +136,8 @@ function App() {
 
             </div>
             <div className="taskTable">
-                <TaskTable handleSort={handleSort} taskList={taskList} minDate={getTodayString()} setTaskList={setTaskList}
+                <TaskTable handleSort={handleSort} taskList={taskList} minDate={getTodayString()}
+                           setTaskList={setTaskList}
                            handleUpdate={saveUpdateData} handleDelete={handleDelete}/>
             </div>
             <SweetAlert2 title={swalProps.title} show={swalProps.show} icon={swalProps.icon}

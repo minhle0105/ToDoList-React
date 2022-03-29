@@ -35,8 +35,7 @@ export const TaskTable = (props) => {
     const handleSortLocal = () => {
         if (sortField === 'ascending') {
             setSortField('descending');
-        }
-        else {
+        } else {
             setSortField('ascending');
         }
         props.handleSort(sortField);
@@ -55,7 +54,8 @@ export const TaskTable = (props) => {
                     <tr>
                         <th>#</th>
                         <th>Description</th>
-                        <th>Deadline <img id="sortCol" onClick={() => handleSortLocal()} src="/sortIcon.png" width={12} height={12} alt="sort"/> </th>
+                        <th>Deadline <img id="sortCol" onClick={() => handleSortLocal()} src="/sortIcon.png" width={12}
+                                          height={12} alt="sort"/></th>
                         <th colSpan={2} style={{textAlign: "center"}}> Action</th>
                     </tr>
                     </thead>
@@ -64,7 +64,8 @@ export const TaskTable = (props) => {
                         <Fragment key={index}>
                             {idToUpdate === index ?
                                 <EditableTask minDate={props.minDate} index={index} task={task} name={props.newName}
-                                              setIdToUpdate={setIdToUpdate} saveUpdateData={props.handleUpdate} handleCancel={handleCancelUpdate}/> :
+                                              setIdToUpdate={setIdToUpdate} saveUpdateData={props.handleUpdate}
+                                              handleCancel={handleCancelUpdate}/> :
                                 <ReadOnlyTask index={index} task={task} showPopup={showPopup}
                                               handleUpdateClick={handleUpdateClick}/>}
                         </Fragment>
