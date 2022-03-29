@@ -73,7 +73,7 @@ export const TaskTable = (props) => {
                         <th>#</th>
                         <th>Description</th>
                         <th>Deadline <img id="sortCol" onClick={() => handleSortLocal()} src="/sortIcon.png" width={12} height={12} alt="sort"/> </th>
-                        <th colSpan={2}> </th>
+                        <th colSpan={2} style={{textAlign: "center"}}> Action </th>
                     </tr>
                     </thead>
                     <tbody>

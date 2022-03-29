@@ -10,14 +10,14 @@ export const EditableTask = (props) => {
             <td><input defaultValue={props.task.taskDeadline} id="taskDeadline" type="date" required onChange={(e) => {
                 props.setDeadline(e.target.value ? e.target.value : props.task.taskDeadline)
             }}/></td>
-            <td style={{textAlign: "center"}}><Button variant="btn btn-outline-danger" onClick={(e) => {
-                e.preventDefault();
-                props.handleCancel();
-            }}>Cancel</Button></td>
             <td style={{textAlign: "center"}}><Button variant="btn btn-outline-success" onClick={(e) => {
                 e.preventDefault();
                 props.saveUpdateData(props.index)
             }}>Update</Button></td>
+            <td style={{textAlign: "center"}}><Button variant="btn btn-outline-danger" onClick={(e) => {
+                e.preventDefault();
+                props.handleCancel();
+            }}>Cancel</Button></td>
         </tr>
     )
 }
