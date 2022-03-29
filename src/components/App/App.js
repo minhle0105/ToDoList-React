@@ -15,7 +15,7 @@ function App() {
     const [showAddForm, setShowAddForm] = useState(false);
 
     useEffect(() => {
-        localStorage.setItem("taskList", JSON.stringify(taskList))
+        localStorage.setItem("taskList", JSON.stringify(taskList));
     }, [taskList])
 
     const showSuccessAlert = () => {
@@ -83,31 +83,6 @@ function App() {
         return 0
     }
 
-    const descendingComparator = (a, b) => {
-        if (a.taskDeadline > b.taskDeadline) {
-            return 1;
-        }
-        if (a.taskDeadline < b.taskDeadline) {
-            return -1;
-        }
-        return 0
-    }
-
-    const handleSort = (type) => {
-        const originalTaskList = [...taskList];
-        if (type === "ascending") {
-            taskList.sort(ascendingComparator);
-            setTaskList(taskList);
-        }
-        else if (type === "descending") {
-            taskList.sort(descendingComparator);
-            setTaskList(taskList);
-        }
-        else {
-            setTaskList(originalTaskList)
-        }
-    }
-
     const getTodayString = () => {
         const [month, day, year] = new Date()
             .toLocaleDateString("en-US")
@@ -130,7 +105,7 @@ function App() {
 
             </div>
             <div className="taskTable">
-                <TaskTable taskList={taskList} minDate={getTodayString()} setTaskList={setTaskList} setTaskName={setTaskName} setTaskDeadline={setTaskDeadline} handleSort={handleSort} handleDelete={handleDelete}/>
+                <TaskTable taskList={taskList} minDate={getTodayString()} setTaskList={setTaskList} setTaskName={setTaskName} setTaskDeadline={setTaskDeadline} handleDelete={handleDelete}/>
             </div>
             <SweetAlert2 title={swalProps.title} show={swalProps.show} icon={swalProps.icon}
                          showConfirmButton={swalProps.showConfirmButton}/>

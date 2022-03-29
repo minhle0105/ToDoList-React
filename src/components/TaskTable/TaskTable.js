@@ -8,7 +8,6 @@ import {ReadOnlyTask} from "../Task/ReadOnlyTask";
 import {Fragment} from "react";
 
 export const TaskTable = (props) => {
-    const [sortField, setSortField] = useState('ascending');
     const [idToUpdate, setIdToUpdate] = useState(null);
     const [newTaskName, setNewName] = useState('');
     const [newTaskDeadline, setNewDeadline] = useState('');
@@ -26,29 +25,19 @@ export const TaskTable = (props) => {
         })
     }
 
-    const handleSortLocal = () => {
-        if (sortField === 'ascending') {
-            setSortField('descending');
-        }
-        else {
-            setSortField('ascending');
-        }
-        props.handleSort(sortField);
-    }
-
     const handleUpdateClick = (i) => {
         setIdToUpdate(i);
     }
 
-    const saveUpdateData = (i) => {
+    const saveUpdateData = () => {
         if (!newTaskName) {
-            setNewName(props.taskList[i].taskName);
+            setNewName(props.taskList[idToUpdate].taskName);
         }
         if (!newTaskDeadline) {
-            setNewDeadline(props.taskList[i].taskDeadline);
+            setNewDeadline(props.taskList[idToUpdate].taskDeadline);
         }
         const newTaskList = [...props.taskList];
-        newTaskList[i] = {
+        newTaskList[idToUpdate] = {
             taskName: newTaskName,
             taskDeadline: newTaskDeadline
         }
@@ -72,7 +61,7 @@ export const TaskTable = (props) => {
                     <tr>
                         <th>#</th>
                         <th>Description</th>
-                        <th>Deadline <img id="sortCol" onClick={() => handleSortLocal()} src="/sortIcon.png" width={12} height={12} alt="sort"/> </th>
+                        <th>Deadline</th>
                         <th colSpan={2} style={{textAlign: "center"}}> Action </th>
                     </tr>
                     </thead>
