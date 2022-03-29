@@ -1,6 +1,6 @@
 import {Button} from "react-bootstrap";
 
-export const Task = (props) => {
+export const EditableTask = (props) => {
     return (
         <tr key={props.index}>
             <td>{props.index + 1}</td>

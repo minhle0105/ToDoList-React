@@ -3,7 +3,7 @@ import {Button, Table} from "react-bootstrap";
 import Swal from "sweetalert2";
 import {useState} from "react";
 import './TaskTable.css';
-import {Task} from "../Task/Task";
+import {EditableTask} from "../Task/EditableTask";
 
 export const TaskTable = (props) => {
     const [sortField, setSortField] = useState('ascending');
@@ -49,7 +49,7 @@ export const TaskTable = (props) => {
                 <tbody>
                 {props.taskList.map((task, index) => {
                     return (
-                        <Task index={index} task={task} showPopup={showPopup} />
+                        <EditableTask index={index} task={task} showPopup={showPopup} />
                     )
                 })}
                 </tbody>
