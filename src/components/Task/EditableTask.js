@@ -12,7 +12,7 @@ export const EditableTask = (props) => {
             }}/></td>
             <td style={{textAlign: "center"}}><Button variant="btn btn-outline-success" onClick={(e) => {
                 e.preventDefault();
-                props.saveUpdateData(props.index)
+                props.saveUpdateData()
             }}>Update</Button></td>
             <td style={{textAlign: "center"}}><Button variant="btn btn-outline-danger" onClick={(e) => {
                 e.preventDefault();
