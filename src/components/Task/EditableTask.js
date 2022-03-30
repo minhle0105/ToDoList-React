@@ -15,12 +15,12 @@ export const EditableTask = (props) => {
                        onChange={(e) => {
                            setNewDate(e.target.value ? e.target.value : props.task.taskDeadline)
                        }}/></td>
-            <td style={{textAlign: "center"}}><Button variant="btn btn-outline-success" onClick={(e) => {
+            <td style={{textAlign: "center"}}><Button variant="warning" onClick={(e) => {
                 e.preventDefault();
                 props.saveUpdateData(props.index, newName, newDate)
                 props.setIdToUpdate(null)
             }}>Update</Button></td>
-            <td style={{textAlign: "center"}}><Button variant="btn btn-outline-danger" onClick={(e) => {
+            <td style={{textAlign: "center"}}><Button variant="danger" onClick={(e) => {
                 e.preventDefault();
                 props.handleCancel(props.index);
             }}>Cancel</Button></td>
