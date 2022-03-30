@@ -68,10 +68,9 @@ function App() {
     }
 
     const handleDelete = (i) => {
-        setTaskList(prevState => {
-            prevState.splice(i, 1);
-            return prevState;
-        })
+        const newTaskList = [...taskList];
+        newTaskList.splice(i, 1);
+        setTaskList(newTaskList);
         showDeleteAlert();
     }
 
@@ -115,13 +114,12 @@ function App() {
     const saveUpdateData = (i, newName, newDate) => {
         const originalName = taskList[i].taskName;
         const originalDate = taskList[i].taskDeadline;
-        setTaskList(prevState => {
-            prevState[i] = {
-                taskName: newName,
-                taskDeadline: newDate
-            }
-            return prevState;
-        })
+        const newTaskList = [...taskList];
+        newTaskList[i] = {
+            taskName: newName,
+            taskDeadline: newDate
+        }
+        setTaskList(newTaskList);
         if (newName !== originalName || newDate !== originalDate) {
             Swal.fire({
                 title: "Successfully Updated",
