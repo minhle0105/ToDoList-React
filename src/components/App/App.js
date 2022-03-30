@@ -5,6 +5,7 @@ import {TaskTable} from "../TaskTable/TaskTable";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SweetAlert2 from 'react-sweetalert2';
 import {Button} from "react-bootstrap";
+import Swal from "sweetalert2";
 
 function App() {
 
@@ -67,10 +68,11 @@ function App() {
     }
 
     const handleDelete = (i) => {
-        let newTaskList = [...taskList];
-        newTaskList.splice(i, 1);
+        setTaskList(prevState => {
+            prevState.splice(i, 1);
+            return prevState;
+        })
         showDeleteAlert();
-        setTaskList(newTaskList);
     }
 
     const handleSort = (type) => {
@@ -111,13 +113,23 @@ function App() {
     };
 
     const saveUpdateData = (i, newName, newDate) => {
-
-        let newTaskList = [...taskList];
-        newTaskList[i] = {
-            taskName: newName,
-            taskDeadline: newDate
+        const originalName = taskList[i].taskName;
+        const originalDate = taskList[i].taskDeadline;
+        setTaskList(prevState => {
+            prevState[i] = {
+                taskName: newName,
+                taskDeadline: newDate
+            }
+            return prevState;
+        })
+        if (newName !== originalName || newDate !== originalDate) {
+            Swal.fire({
+                title: "Successfully Updated",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1000
+            }).then();
         }
-        setTaskList(newTaskList);
     }
 
 
