@@ -67,10 +67,11 @@ function App() {
     }
 
     const handleDelete = (i) => {
-        let newTaskList = [...taskList];
-        newTaskList.splice(i, 1);
+        setTaskList(prevState => {
+            prevState.splice(i, 1);
+            return prevState;
+        })
         showDeleteAlert();
-        setTaskList(newTaskList);
     }
 
     const handleSort = (type) => {
@@ -111,13 +112,13 @@ function App() {
     };
 
     const saveUpdateData = (i, newName, newDate) => {
-
-        let newTaskList = [...taskList];
-        newTaskList[i] = {
-            taskName: newName,
-            taskDeadline: newDate
-        }
-        setTaskList(newTaskList);
+        setTaskList(prevState => {
+            prevState[i] = {
+                taskName: newName,
+                taskDeadline: newDate
+            }
+            return prevState;
+        })
     }
 
 
