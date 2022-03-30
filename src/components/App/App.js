@@ -5,6 +5,7 @@ import {TaskTable} from "../TaskTable/TaskTable";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SweetAlert2 from 'react-sweetalert2';
 import {Button} from "react-bootstrap";
+import Swal from "sweetalert2";
 
 function App() {
 
@@ -112,6 +113,8 @@ function App() {
     };
 
     const saveUpdateData = (i, newName, newDate) => {
+        const originalName = taskList[i].taskName;
+        const originalDate = taskList[i].taskDeadline;
         setTaskList(prevState => {
             prevState[i] = {
                 taskName: newName,
@@ -119,6 +122,14 @@ function App() {
             }
             return prevState;
         })
+        if (newName !== originalName || newDate !== originalDate) {
+            Swal.fire({
+                title: "Successfully Updated",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1000
+            }).then();
+        }
     }
 
 
