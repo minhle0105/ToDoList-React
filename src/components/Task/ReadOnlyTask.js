@@ -4,8 +4,8 @@ export const ReadOnlyTask = (props) => {
     return (
         <tr key={props.index}>
             <td>{props.index + 1}</td>
-            <td>{props.task.taskName}</td>
-            <td>{props.task.taskDeadline}</td>
+            <td onClick={(e) =>{ props.handleUpdateClick(props.index)}}>{props.task.taskName}</td>
+            <td onClick={(e) =>{ props.handleUpdateClick(props.index)}}>{props.task.taskDeadline}</td>
             <td style={{textAlign: "center"}}><Button variant="warning" onClick={(e) => {
                 e.preventDefault();
                 props.handleUpdateClick(props.index)
