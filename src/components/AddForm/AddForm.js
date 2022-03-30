@@ -16,20 +16,20 @@ export const AddForm = (props) => {
             <Form style={{margin: 10}} onSubmit={props.handleSubmit}>
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="taskName">Description</Form.Label>
-                    <Form.Control autoComplete="off" required id="taskName" type="text" value={props.taskName}
+                    <Form.Control style={{backgroundColor: "#ACDDDE", border: "1px solid black"}} autoComplete="off" required id="taskName" type="text" value={props.taskName}
                                   onChange={(e) => props.setTaskName(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label htmlFor="taskDeadline">Deadline</Form.Label>
-                    <Form.Control required type="date" min={props.minDate} id="taskDeadline" value={props.taskDeadline}
+                    <Form.Control style={{backgroundColor: "#ACDDDE", border: "1px solid black"}} required type="date" min={props.minDate} id="taskDeadline" value={props.taskDeadline}
                                   onChange={(e) => props.setTaskDeadline(e.target.value)}/>
                 </Form.Group>
                 <div style={{width: "100%", display: "flex"}}>
                     <div style={{textAlign: "center", display: "inline"}}>
-                        <Button variant="outline-primary" type="submit">Submit</Button>
+                        <Button type="submit">Submit</Button>
                     </div>
                     <div style={{textAlign: "center", display: "inline"}}>
-                        <Button variant="outline-dark" onMouseDown={e => handleReset(e)}>Reset</Button>
+                        <Button variant="dark" onMouseDown={e => handleReset(e)}>Reset</Button>
                     </div>
                 </div>
             </Form>
