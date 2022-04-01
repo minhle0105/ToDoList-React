@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import './App.css';
-import {AddForm} from "../AddForm/AddForm";
-import {TaskTable} from "../TaskTable/TaskTable";
+import AddForm from "../AddForm/AddForm";
+import TaskTable from "../TaskTable/TaskTable";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SweetAlert2 from 'react-sweetalert2';
 import {Button} from "react-bootstrap";
@@ -135,7 +135,7 @@ function App() {
         <div className="container">
             <div style={{marginTop: 10}}>
                 <Button onMouseDown={(e) => {
-                    e.preventDefault();
+
                     setShowAddForm(!showAddForm)
                 }}>{showAddForm ? 'Hide Add Form' : 'Show Add Form'}</Button>
             </div>
