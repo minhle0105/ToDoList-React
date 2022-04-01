@@ -8,7 +8,6 @@ import {ReadOnlyTask} from "../Task/ReadOnlyTask";
 import {Fragment} from "react";
 
 const TaskTable = (props) => {
-    console.log("TABLE")
     const [idToUpdate, setIdToUpdate] = useState(null);
     const [sortField, setSortField] = useState('ascending');
     const showPopup = (index, name) => {

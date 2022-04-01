@@ -4,7 +4,6 @@ import {memo} from "react";
 
 
 const AddForm = (props) => {
-    console.log("FORM");
     const handleReset = (e) => {
         e.preventDefault();
         props.setTaskName('');
