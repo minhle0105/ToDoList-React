@@ -8,6 +8,7 @@ import {ReadOnlyTask} from "../Task/ReadOnlyTask";
 import {Fragment} from "react";
 
 const TaskTable = (props) => {
+    console.log("Table")
     const [idToUpdate, setIdToUpdate] = useState(null);
     const [sortField, setSortField] = useState('ascending');
     const showPopup = (index, name) => {
@@ -78,4 +79,6 @@ const TaskTable = (props) => {
     )
 }
 
-export default memo(TaskTable);
+export default memo(TaskTable, (prevProps, nextProps) => {
+    return prevProps === nextProps;
+});
