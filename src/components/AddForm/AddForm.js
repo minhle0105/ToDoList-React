@@ -4,7 +4,7 @@ import {memo} from "react";
 
 
 const AddForm = (props) => {
-    console.log("Form");
+    console.log("FORM");
     const handleReset = (e) => {
         e.preventDefault();
         props.setTaskName('');
@@ -39,5 +39,5 @@ const AddForm = (props) => {
 }
 
 export default memo(AddForm, ((prevProps, nextProps) => {
-    return prevProps === nextProps;
+    return JSON.stringify(prevProps) === JSON.stringify(nextProps);
 }));

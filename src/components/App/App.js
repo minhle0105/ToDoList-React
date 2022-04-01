@@ -135,7 +135,7 @@ function App() {
         <div className="container">
             <div style={{marginTop: 10}}>
                 <Button onMouseDown={(e) => {
-                    e.preventDefault();
+
                     setShowAddForm(!showAddForm)
                 }}>{showAddForm ? 'Hide Add Form' : 'Show Add Form'}</Button>
             </div>
