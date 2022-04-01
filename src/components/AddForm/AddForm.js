@@ -1,8 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button, Form} from "react-bootstrap";
+import {memo} from "react";
 
 
-export const AddForm = (props) => {
+const AddForm = (props) => {
 
     const handleReset = (e) => {
         e.preventDefault();
@@ -36,3 +37,5 @@ export const AddForm = (props) => {
         </div>
     )
 }
+
+export default memo(AddForm);

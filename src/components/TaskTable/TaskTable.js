@@ -1,13 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table} from "react-bootstrap";
 import Swal from "sweetalert2";
-import {useState} from "react";
+import {memo, useState} from "react";
 import './TaskTable.css';
 import {EditableTask} from "../Task/EditableTask";
 import {ReadOnlyTask} from "../Task/ReadOnlyTask";
 import {Fragment} from "react";
 
-export const TaskTable = (props) => {
+const TaskTable = (props) => {
     const [idToUpdate, setIdToUpdate] = useState(null);
     const [sortField, setSortField] = useState('ascending');
     const showPopup = (index, name) => {
@@ -77,3 +77,5 @@ export const TaskTable = (props) => {
         </div>
     )
 }
+
+export default memo(TaskTable);
