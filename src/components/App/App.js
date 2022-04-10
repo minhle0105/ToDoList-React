@@ -7,7 +7,7 @@ import SweetAlert2 from 'react-sweetalert2';
 import {Button} from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { addToDo } from "../../redux/todoSlice";
+import { addToDo, deleteToDo } from "../../redux/todoSlice";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -74,9 +74,7 @@ function App() {
     }
 
     const handleDelete = (i) => {
-        const newTaskList = [...taskList];
-        newTaskList.splice(i, 1);
-        setTaskList(newTaskList);
+        dispatch(deleteToDo({i}));
         showDeleteAlert();
     }
 
