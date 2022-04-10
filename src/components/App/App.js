@@ -6,18 +6,27 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SweetAlert2 from 'react-sweetalert2';
 import {Button} from "react-bootstrap";
 import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { addToDo } from "../../redux/todoSlice";
+import { useSelector } from "react-redux";
 
 function App() {
 
-    const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem("taskList")) ? JSON.parse(localStorage.getItem("taskList")) : []);
+    const selectorTaskList = useSelector((state) => {
+        return state.todos;
+    });
+    const [taskList, setTaskList] = useState(selectorTaskList)
     const [taskName, setTaskName] = useState('');
     const [taskDeadline, setTaskDeadline] = useState('')
     const [swalProps, setSwalProps] = useState({});
     const [showAddForm, setShowAddForm] = useState(false);
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        localStorage.setItem("taskList", JSON.stringify(taskList));
-    }, [taskList])
+        setTaskList(selectorTaskList)
+        localStorage.setItem("taskList", JSON.stringify(selectorTaskList));
+    }, [selectorTaskList])
 
     const showSuccessAlert = () => {
         setSwalProps({
@@ -50,13 +59,10 @@ function App() {
     }
 
     const addNewTask = (taskName, taskDeadline) => {
-        setTaskList([
-            ...taskList,
-            {
-                taskName: taskName,
-                taskDeadline: taskDeadline,
-            },
-        ]);
+        dispatch(addToDo({
+            taskName: taskName,
+            taskDeadline: taskDeadline
+        }))
     }
 
     const handleSubmit = (e) => {

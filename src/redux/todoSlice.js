@@ -1,8 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const todoSlice = createSlice({
-    name: "todos",
     initialState: JSON.parse(localStorage.getItem("taskList")) ? JSON.parse(localStorage.getItem("taskList")) : [],
+    name: 'todos',
     reducers: {
         addToDo: (state, action) => {
             const newToDo = {
