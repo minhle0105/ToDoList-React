@@ -7,7 +7,7 @@ import SweetAlert2 from 'react-sweetalert2';
 import {Button} from "react-bootstrap";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { addToDo, deleteToDo } from "../../redux/todoSlice";
+import { addToDo, deleteToDo, updateToDo, sortToDo } from "../../redux/todoSlice";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -79,33 +79,7 @@ function App() {
     }
 
     const handleSort = (type) => {
-        if (type === 'ascending') {
-            taskList.sort(ascendingComparator);
-        } else if (type === 'descending') {
-            taskList.sort(descendingComparator);
-        }
-
-        setTaskList(taskList);
-    }
-
-    const ascendingComparator = (a, b) => {
-        if (a.taskDeadline > b.taskDeadline) {
-            return -1;
-        }
-        if (a.taskDeadline < b.taskDeadline) {
-            return 1;
-        }
-        return 0
-    }
-
-    const descendingComparator = (a, b) => {
-        if (a.taskDeadline > b.taskDeadline) {
-            return 1;
-        }
-        if (a.taskDeadline < b.taskDeadline) {
-            return -1;
-        }
-        return 0
+        dispatch(sortToDo({type}))
     }
 
     const getTodayString = () => {
@@ -115,22 +89,21 @@ function App() {
         return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     };
 
+    const showUpdateAlert = () => {
+        Swal.fire({
+            title: "Successfully Updated",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1000
+        }).then();
+    }
+
     const saveUpdateData = (i, newName, newDate) => {
         const originalName = taskList[i].taskName;
         const originalDate = taskList[i].taskDeadline;
-        const newTaskList = [...taskList];
-        newTaskList[i] = {
-            taskName: newName,
-            taskDeadline: newDate
-        }
-        setTaskList(newTaskList);
+        dispatch(updateToDo({i, newName, newDate}));
         if (newName !== originalName || newDate !== originalDate) {
-            Swal.fire({
-                title: "Successfully Updated",
-                icon: "success",
-                showConfirmButton: false,
-                timer: 1000
-            }).then();
+            showUpdateAlert();
         }
     }
 
@@ -139,7 +112,6 @@ function App() {
         <div className="container">
             <div style={{marginTop: 10}}>
                 <Button onMouseDown={(e) => {
-
                     setShowAddForm(!showAddForm)
                 }}>{showAddForm ? 'Hide Add Form' : 'Show Add Form'}</Button>
             </div>
