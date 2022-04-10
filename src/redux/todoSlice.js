@@ -10,7 +10,9 @@ const todoSlice = createSlice({
                 taskName: action.payload.taskName,
                 taskDeadline: action.payload.taskDeadline
             }
-            state.push(newToDo);
+            const newState = [...state];
+            newState.push(newToDo);
+            return newState;
         },
         deleteToDo: (state, action) => {
             const newState = [...state];
