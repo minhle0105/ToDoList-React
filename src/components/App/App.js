@@ -6,13 +6,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Button} from "react-bootstrap";
 import {showSweetAlertModalPopup} from "../../SweetAlertModalPopup";
 import {useDispatch, useSelector} from "react-redux";
-import {addToDo, deleteToDo, sortToDo, updateToDo} from "../../redux/todoSlice";
+import {addToDo, deleteToDo, sortToDo, updateToDo, selectAllTask} from "../../redux/todoSlice";
 
 function App() {
 
-    const selectorTaskList = useSelector((state) => {
-        return state.todos;
-    });
+    const selectorTaskList = useSelector(selectAllTask);
     const [taskList, setTaskList] = useState(selectorTaskList)
     const [taskName, setTaskName] = useState('');
     const [taskDeadline, setTaskDeadline] = useState('')
