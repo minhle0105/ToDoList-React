@@ -67,9 +67,9 @@ function App() {
     return (
         <div className="container">
             <div style={{marginTop: 10}}>
-                <Button onMouseDown={(e) => {
+                <Button variant={showAddForm ? 'danger' : 'primary'} style={{width: 100, maxWidth: "100%"}} onMouseDown={(e) => {
                     setShowAddForm(!showAddForm)
-                }}>{showAddForm ? 'Hide Add Form' : 'Show Add Form'}</Button>
+                }}>{showAddForm ? 'Close' : 'Add Task'}</Button>
             </div>
             <div className="addForm">
                 {showAddForm ? <AddForm minDate={getTodayString()} taskName={taskName} taskDeadline={taskDeadline}
