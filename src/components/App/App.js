@@ -1,107 +1,50 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import './App.css';
 import AddForm from "../AddForm/AddForm";
 import TaskTable from "../TaskTable/TaskTable";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import SweetAlert2 from 'react-sweetalert2';
 import {Button} from "react-bootstrap";
-import Swal from "sweetalert2";
+import {showSweetAlertModalPopup} from "../../SweetAlertModalPopup";
+import {useDispatch, useSelector} from "react-redux";
+import {addToDo, deleteToDo, sortToDo, updateToDo, selectAllTask} from "../../redux/todoSlice";
 
 function App() {
 
-    const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem("taskList")) ? JSON.parse(localStorage.getItem("taskList")) : []);
+    const selectorTaskList = useSelector(selectAllTask);
+    const [taskList, setTaskList] = useState(selectorTaskList)
     const [taskName, setTaskName] = useState('');
     const [taskDeadline, setTaskDeadline] = useState('')
-    const [swalProps, setSwalProps] = useState({});
     const [showAddForm, setShowAddForm] = useState(false);
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
-        localStorage.setItem("taskList", JSON.stringify(taskList));
-    }, [taskList])
-
-    const showSuccessAlert = () => {
-        setSwalProps({
-            show: true,
-            title: `Successfully added new task`,
-            icon: 'success',
-            showConfirmButton: false,
-        });
-        setTimeout(() => setSwalProps({
-            show: false,
-            title: `Successfully added new task`,
-            icon: 'success',
-            showConfirmButton: false,
-        }), 1000);
-    }
-
-    const showDeleteAlert = () => {
-        setSwalProps({
-            show: true,
-            title: `Successfully deleted`,
-            icon: 'success',
-            showConfirmButton: false,
-        });
-        setTimeout(() => setSwalProps({
-            show: false,
-            title: `Successfully deleted`,
-            icon: 'success',
-            showConfirmButton: false,
-        }), 1000);
-    }
+        setTaskList(selectorTaskList)
+        localStorage.setItem("taskList", JSON.stringify(selectorTaskList));
+    }, [selectorTaskList])
 
     const addNewTask = (taskName, taskDeadline) => {
-        setTaskList([
-            ...taskList,
-            {
-                taskName: taskName,
-                taskDeadline: taskDeadline,
-            },
-        ]);
+        dispatch(addToDo({
+            taskName: taskName,
+            taskDeadline: taskDeadline
+        }))
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         addNewTask(taskName, taskDeadline);
-        showSuccessAlert();
+        showSweetAlertModalPopup("add")
         setTaskName('');
         setTaskDeadline('');
     }
 
     const handleDelete = (i) => {
-        const newTaskList = [...taskList];
-        newTaskList.splice(i, 1);
-        setTaskList(newTaskList);
-        showDeleteAlert();
+        dispatch(deleteToDo({i}));
+        showSweetAlertModalPopup("delete")
     }
 
     const handleSort = (type) => {
-        if (type === 'ascending') {
-            taskList.sort(ascendingComparator);
-        } else if (type === 'descending') {
-            taskList.sort(descendingComparator);
-        }
-
-        setTaskList(taskList);
-    }
-
-    const ascendingComparator = (a, b) => {
-        if (a.taskDeadline > b.taskDeadline) {
-            return -1;
-        }
-        if (a.taskDeadline < b.taskDeadline) {
-            return 1;
-        }
-        return 0
-    }
-
-    const descendingComparator = (a, b) => {
-        if (a.taskDeadline > b.taskDeadline) {
-            return 1;
-        }
-        if (a.taskDeadline < b.taskDeadline) {
-            return -1;
-        }
-        return 0
+        dispatch(sortToDo({type}))
     }
 
     const getTodayString = () => {
@@ -114,19 +57,9 @@ function App() {
     const saveUpdateData = (i, newName, newDate) => {
         const originalName = taskList[i].taskName;
         const originalDate = taskList[i].taskDeadline;
-        const newTaskList = [...taskList];
-        newTaskList[i] = {
-            taskName: newName,
-            taskDeadline: newDate
-        }
-        setTaskList(newTaskList);
+        dispatch(updateToDo({i, newName, newDate}));
         if (newName !== originalName || newDate !== originalDate) {
-            Swal.fire({
-                title: "Successfully Updated",
-                icon: "success",
-                showConfirmButton: false,
-                timer: 1000
-            }).then();
+            showSweetAlertModalPopup("update")
         }
     }
 
@@ -134,10 +67,9 @@ function App() {
     return (
         <div className="container">
             <div style={{marginTop: 10}}>
-                <Button onMouseDown={(e) => {
-
+                <Button variant={showAddForm ? 'danger' : 'primary'} style={{width: 100, maxWidth: "100%"}} onMouseDown={(e) => {
                     setShowAddForm(!showAddForm)
-                }}>{showAddForm ? 'Hide Add Form' : 'Show Add Form'}</Button>
+                }}>{showAddForm ? 'Close' : 'Add Task'}</Button>
             </div>
             <div className="addForm">
                 {showAddForm ? <AddForm minDate={getTodayString()} taskName={taskName} taskDeadline={taskDeadline}
@@ -150,8 +82,6 @@ function App() {
                            setTaskList={setTaskList}
                            handleUpdate={saveUpdateData} handleDelete={handleDelete}/>
             </div>
-            <SweetAlert2 title={swalProps.title} show={swalProps.show} icon={swalProps.icon}
-                         showConfirmButton={swalProps.showConfirmButton}/>
         </div>
     );
 }

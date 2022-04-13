@@ -1,11 +1,10 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Table} from "react-bootstrap";
 import Swal from "sweetalert2";
-import {memo, useState} from "react";
+import {Fragment, memo, useState} from "react";
 import './TaskTable.css';
 import {EditableTask} from "../Task/EditableTask";
 import {ReadOnlyTask} from "../Task/ReadOnlyTask";
-import {Fragment} from "react";
 
 const TaskTable = (props) => {
     const [idToUpdate, setIdToUpdate] = useState(null);
