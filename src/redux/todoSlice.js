@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {ascendingComparator, descendingComparator} from "../SortingComparator";
 
-const todoSlice = createSlice({
+const options = {
     initialState: JSON.parse(localStorage.getItem("taskList")) ? JSON.parse(localStorage.getItem("taskList")) : [],
     name: 'todos',
     reducers: {
@@ -42,7 +42,9 @@ const todoSlice = createSlice({
             }
         }
     }
-});
+}
+
+const todoSlice = createSlice(options);
 
 export const selectAllTask = state => state.todos;
 
