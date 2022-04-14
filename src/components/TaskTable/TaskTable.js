@@ -13,7 +13,7 @@ const TaskTable = (props) => {
         Swal.fire({
             title: `Are you sure to delete task "${name.trim()}" ? This action can not be undone`,
             showCancelButton: true,
-            confirmButtonText: 'Yes, delete',
+            confirmButtonText: 'Delete',
             confirmButtonColor: 'Red'
         }).then((result) => {
             if (result.isConfirmed) {
