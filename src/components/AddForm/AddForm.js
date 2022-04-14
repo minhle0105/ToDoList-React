@@ -26,10 +26,10 @@ const AddForm = (props) => {
                 </Form.Group>
                 <div style={{width: "100%", display: "flex"}}>
                     <div style={{textAlign: "center", display: "inline", margin: 10, width: "50%"}}>
-                        <Button type="submit" style={{float: "right", width: "100px", maxWidth: "100%"}}>Add</Button>
+                        <Button type="submit" style={{float: "right"}}>Add</Button>
                     </div>
                     <div style={{textAlign: "center", display: "inline", margin: 10, width: "50%"}}>
-                        <Button variant="dark" style={{float: "left", width: "100px", maxWidth: "100%"}} onMouseDown={e => handleReset(e)}>Reset</Button>
+                        <Button variant="dark" style={{float: "left"}} onMouseDown={e => handleReset(e)}>Reset</Button>
                     </div>
                 </div>
             </Form>

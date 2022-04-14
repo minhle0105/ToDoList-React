@@ -1,3 +1,14 @@
 #sortCol:hover {
     cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    .table thead {
+        display: none;
+    }
+    .table, .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+    }
+
+}

@@ -77,7 +77,7 @@ function App() {
                                         setTaskDeadline={setTaskDeadline} handleSubmit={handleSubmit}/> : null}
 
             </div>
-            <div className="taskTable">
+            <div className="taskTable" >
                 <TaskTable handleSort={handleSort} taskList={taskList} minDate={getTodayString()}
                            setTaskList={setTaskList}
                            handleUpdate={saveUpdateData} handleDelete={handleDelete}/>
